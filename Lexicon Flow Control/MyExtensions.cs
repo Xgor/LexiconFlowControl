@@ -4,11 +4,11 @@ public static class MyExtensions
 {
     extension(string str)
     {
-        // TODO impement
+        // returns null if third word can't be returned
         public string? GetThirdWord()
         {
-            str.Split();
-            return str;
+            string[] s = str.Split();
+            return s.Length > 2 ? s[2] : null;
         }
 
     }
