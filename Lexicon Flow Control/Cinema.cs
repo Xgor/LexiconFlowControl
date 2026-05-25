@@ -10,6 +10,8 @@ public class Cinema
     const int PRICE_JUNIOR = 80;
     const int PRICE_STANDARD = 120;
 
+    private const int AGE_JUNIOR = 5;
+    private const int AGE_FREE_SENIOR = 101;
     private const int AGE_SENIOR = 64;
     private const int AGE_ADULT = 20;
     private const string CURRENCY = "kr";
@@ -22,6 +24,7 @@ public class Cinema
             PRICE_JUNIOR => priceType = "Ungdomspris",
             PRICE_STANDARD => priceType = "Standardpris",
             PRICE_SENIOR => priceType = "Pensionärspris",
+            0 => priceType = "Gratis Inträde",
             _ => throw new ArgumentOutOfRangeException(nameof(price), $"Not defined price type: {price}"),
         };
 
@@ -36,7 +39,9 @@ public class Cinema
         return age switch
         {
             < 0 => throw new ArgumentOutOfRangeException(),
-            < AGE_ADULT => PRICE_JUNIOR,
+            < AGE_JUNIOR => 0, // Free if you are too young
+            < AGE_ADULT => PRICE_JUNIOR, 
+            >= AGE_FREE_SENIOR => 0, // Free if you are very old
             > AGE_SENIOR => PRICE_SENIOR,
             _ => PRICE_STANDARD
         };

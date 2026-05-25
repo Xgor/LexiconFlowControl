@@ -7,7 +7,7 @@ public class CinemaTest
     [Test]
     public void JuniorCost()
     {
-        Assert.That(Cinema.GetCinemaPrice(1)==80);
+        Assert.That(Cinema.GetCinemaPrice(5)==80);
         Assert.That(Cinema.GetCinemaPrice(19)==80);
     }
     
@@ -23,9 +23,15 @@ public class CinemaTest
     public void SeniorCostTest()
     {
         Assert.That(Cinema.GetCinemaPrice(65) == 90);
-        Assert.That(Cinema.GetCinemaPrice(120)==90);
+        Assert.That(Cinema.GetCinemaPrice(100)==90);
     }
 
+    public void FreeEntranceTest()
+    {
+        Assert.That(Cinema.GetCinemaPrice(5) == 0);
+        Assert.That(Cinema.GetCinemaPrice(101) == 0);
+    }
+    
     [Test]
     public void InvalidAgeTest()
     {
@@ -33,23 +39,28 @@ public class CinemaTest
     }
     
     [Test]
-    public void JuniorCostNameTest()
+    public void JuniorCostTextTest()
     {
-        Assert.That(Cinema.GetCinemaPriceText("1")=="Ungdomspris: 80kr");
+        Assert.That(Cinema.GetCinemaPriceText("6")=="Ungdomspris: 80kr");
     }
     
     [Test]
-    public void AdultCostNameTest()
+    public void AdultCostTextTest()
     {
         Assert.That(Cinema.GetCinemaPriceText("43")=="Standardpris: 120kr");
     }
+    
     [Test]
-    public void SeniorCostNameTest()
+    public void SeniorCostTextTest()
     {
         Assert.That(Cinema.GetCinemaPriceText("66")=="Pensionärspris: 90kr");
-        
     }
     
+    [Test]
+    public void FreeTextTest()
+    {
+        Assert.That(Cinema.GetCinemaPriceText("3")=="Gratis Inträde: 0kr");
+    }
     
     [Test]
     public void InvalidAgeNameTest()
