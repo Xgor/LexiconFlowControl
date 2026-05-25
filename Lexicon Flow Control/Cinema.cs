@@ -13,10 +13,6 @@ public class Cinema
     private const int AGE_SENIOR = 64;
     private const int AGE_ADULT = 20;
     private const string CURRENCY = "kr";
-    public Cinema()
-    {
-        
-    }
 
     static public string GetCinemaPriceText(string age)
     {
@@ -33,12 +29,13 @@ public class Cinema
     }
     static public int GetCinemaPrice(string age)
     {
-        return GetCinemaPrice(int.Parse(age));
+        return GetCinemaPrice(int.TryParse(age,out int i) ? i : -1);
     }
     static public int GetCinemaPrice(int age)
     {
         return age switch
         {
+            < 0 => throw new ArgumentOutOfRangeException(),
             < AGE_ADULT => PRICE_JUNIOR,
             > AGE_SENIOR => PRICE_SENIOR,
             _ => PRICE_STANDARD

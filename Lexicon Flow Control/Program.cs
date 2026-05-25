@@ -62,11 +62,11 @@ class Program
             for (int i = 0; i < groupsize; i++)
             {
                 int age;
-                while (!int.TryParse(Console.ReadLine(), out age))
+                while (!int.TryParse(Console.ReadLine(), out age) && age < 0)
                 {
                     Console.WriteLine("Faulty input");
                 }
-
+                
                 totalPrice += Cinema.GetCinemaPrice(age);
             }
         }
